@@ -25,19 +25,9 @@ public class ProjectGUI : MonoBehaviour {
         }
     }
 
-    public void SizeSmallButtonClick()
+    public void SizeButtonClick(int sizeIndex)
     {
-
-    }
-
-    public void SizeMediumButtonClick()
-    {
-
-    }
-
-    public void SizeLargeButtonClick()
-    {
-
+        project.InitializeProject(sizeIndex);
     }
 
     private void Start()
