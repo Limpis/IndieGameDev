@@ -13,14 +13,18 @@ public class Project : MonoBehaviour {
     [Tooltip("A percentage number with which project size can scale from base value.")]
     private int projectSizeFluctuation;
 
+    private ProjectGUI gui;
+    private int projectNumber = 0;
     private bool activeProject;
-    private float remainingProblems;
+    private int remainingProblems;
+    private string projectName;
 
     public bool StartNewProject()
     {
         if(!activeProject)
         {
             activeProject = true;
+            projectNumber++;
             Debug.Log("New project started");
             return true;
         }
@@ -30,7 +34,7 @@ public class Project : MonoBehaviour {
         }
     }
 
-    public void InitializeProject(int sizeIndex)
+    public bool InitializeProject(int sizeIndex)
     {
         if (activeProject)
         {
@@ -38,21 +42,33 @@ public class Project : MonoBehaviour {
             {
                 case 0:
                     CalculateInitialProblems(smallProjectProblems);
+                    projectName = "sProjectNr" + projectNumber;
+                    gui.SetProjectNameText(projectName);
                     break;
                 case 1:
                     CalculateInitialProblems(mediumProjectProblems);
+                    projectName = "mProjectNr" + projectNumber;
+                    gui.SetProjectNameText(projectName);
                     break;
                 case 2:
                     CalculateInitialProblems(largeProjectProblems);
+                    projectName = "lProjectNr" + projectNumber;
+                    gui.SetProjectNameText(projectName);
                     break;
                 default:
                     Debug.Log("Error! Incorrect index set in project size button");
-                    break;
+                    return false;
             }
+
+            gui.UpdateProblemsProgress(remainingProblems, true);
+
+            return true;
         }
         else
         {
-            Debug.Log("Error! Trying to set project size when no project is active.");
+            Debug.Log("Error! Trying to calculate project size when no project is active.");
+
+            return false;
         }
     }
 
@@ -67,8 +83,27 @@ public class Project : MonoBehaviour {
         return list;
     }
 
+    public void SolveProblem()
+    {
+        if(remainingProblems > 0)
+        {
+            remainingProblems--;
+            gui.UpdateProblemsProgress(remainingProblems, false);
+        }
+        else
+        {
+            Debug.Log("Project finished! Follow up not implemented yet");
+        }
+    }
+
+    public string GetProjectName()
+    {
+        return projectName;
+    }
+
     private void Start()
     {
+        gui = GetComponent<ProjectGUI>();
         activeProject = false;
     }
 
@@ -84,6 +119,16 @@ public class Project : MonoBehaviour {
         float temp = baseSize + (baseSize * positiveFactor) - (baseSize * negativeFactor);
 
         remainingProblems = Mathf.RoundToInt(temp);
-        Debug.Log("Initial problems set to: " + remainingProblems);
+    }
+
+    IEnumerator progressTick()
+    {
+        while (remainingProblems > 0)
+        {
+            yield return new WaitForSeconds(1);
+
+            remainingProblems--;
+            gui.UpdateProblemsProgress(remainingProblems, false);
+        }
     }
 }
