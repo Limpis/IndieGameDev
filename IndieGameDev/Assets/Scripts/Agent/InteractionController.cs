@@ -15,6 +15,7 @@ public class InteractionController : MonoBehaviour {
     {
         if(Input.GetMouseButtonDown(0))
         {
+            //Add raycast so that mouse is not tracing though other GUI components.
             gui.ToggleCanvas();
         }
     }

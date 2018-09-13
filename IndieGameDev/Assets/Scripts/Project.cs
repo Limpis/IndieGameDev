@@ -101,6 +101,18 @@ public class Project : MonoBehaviour {
         return projectName;
     }
 
+    public bool ProjectIsActive()
+    {
+        if(activeProject)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private void Start()
     {
         gui = GetComponent<ProjectGUI>();
