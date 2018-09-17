@@ -19,7 +19,7 @@ public class ProjectGUI : MonoBehaviour {
     [SerializeField]
     private GameObject projectNameText;
     [SerializeField]
-    private GameObject projectProblemsText, progressBar;
+    private GameObject projectProblemsText, projectAverageQualityText, progressBar;
 
     private Project project;
     private int initialProblems, remainingProblems;
@@ -67,6 +67,11 @@ public class ProjectGUI : MonoBehaviour {
 
         projectProblemsText.GetComponent<Text>().text = "Problems Remaining: " + remainingProblems;
         progressBar.GetComponent<Slider>().value = CalculateSliderPosition();
+    }
+
+    public void UpdateAverageQualityText(int quality)
+    {
+        projectAverageQualityText.GetComponent<Text>().text = "Average Quality: " + quality.ToString();
     }
 
     private void Start()

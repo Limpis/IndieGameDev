@@ -11,6 +11,7 @@ public class Development : MonoBehaviour {
 
     private GameObject workedTask;
     private AgentGUI gui;
+    private Personality personality;
     private List<GameObject> availableTasks;
 
     public void AgentTick()
@@ -51,6 +52,7 @@ public class Development : MonoBehaviour {
     private void Start()
     {
         gui = GetComponent<AgentGUI>();
+        personality = GetComponent<Personality>();
     }
 
     private IEnumerator ProblemSolving(GameObject startTask)
@@ -59,6 +61,8 @@ public class Development : MonoBehaviour {
         {
             GameObject solution = Instantiate(solutionPrefab, solutionSpawn);
             solution.GetComponent<Solution>().SetTarget(workedTask);
+            Debug.Log("Skill is: " + personality.GetSkill());
+            solution.GetComponent<SolutionData>().SolutionQuality = personality.GetSkill();
 
             yield return new WaitForSeconds(3f);
         }

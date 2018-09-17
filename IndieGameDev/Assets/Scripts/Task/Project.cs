@@ -13,7 +13,7 @@ public class Project : Task {
     [Tooltip("A percentage number with which project size can scale from base value.")]
     private int projectSizeFluctuation;
     [SerializeField]
-    new Color taskColor;
+    Color solutionColor;
 
     private ProjectGUI gui;
     private int projectNumber = 0;
@@ -85,41 +85,23 @@ public class Project : Task {
         return list;
     }
 
-    public override void SolveProblem()
+    public override void SolveProblem(int quality)
     {
+        base.SolveProblem(quality);
+
         if(remainingProblems > 0)
         {
-            remainingProblems--;
             gui.UpdateProblemsProgress(remainingProblems, false);
         }
-        else
-        {
-            Debug.Log("Project finished! Follow up not implemented yet");
-        }
+
+        gui.UpdateAverageQualityText(base.averageQuality);
     }
-
-    /*public string GetProjectName()
-    {
-        return projectName;
-    }*/
-
-    /*public bool ProjectIsActive()
-    {
-        if(activeProject)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }*/
 
     private void Start()
     {
         gui = GetComponent<ProjectGUI>();
         base.isActive = false;
-        base.SetColor(taskColor);
+        base.SetColor(solutionColor);
     }
 
     private void CalculateInitialProblems(int baseSize)

@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Personality : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [SerializeField]
+    private int developmentSkill;
+
+    public int GetSkill()
+    {
+        return developmentSkill;
+    }
 }

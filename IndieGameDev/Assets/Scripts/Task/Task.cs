@@ -9,6 +9,10 @@ public class Task : MonoBehaviour {
     protected bool isActive = false;
     protected string taskName;
     protected int remainingProblems;
+    protected int solutionsCount;
+    protected int totalQuality;
+    protected int averageQuality;
+
     protected Color taskColor = Color.cyan;
 
     public bool IsActive()
@@ -33,11 +37,12 @@ public class Task : MonoBehaviour {
         return taskColor;
     }
 
-    public virtual void SolveProblem()
+    public virtual void SolveProblem(int quality)
     {
         if (remainingProblems > 0)
         {
             remainingProblems--;
+            CalculateQuality(quality);
         }
         else
         {
@@ -48,5 +53,13 @@ public class Task : MonoBehaviour {
     protected void SetColor(Color c)
     {
         taskColor = c;
+    }
+
+    protected void CalculateQuality(int quality)
+    {
+        solutionsCount++;
+        totalQuality += quality;
+
+        averageQuality = totalQuality / solutionsCount;
     }
 }

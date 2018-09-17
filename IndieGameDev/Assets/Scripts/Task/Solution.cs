@@ -9,6 +9,7 @@ public class Solution : MonoBehaviour {
     [SerializeField]
     private float lifeTime;
 
+    private SolutionData data;
     private GameObject targetTask;
     private MeshRenderer meshRenderer;
 
@@ -19,6 +20,8 @@ public class Solution : MonoBehaviour {
 
     private void Start()
     {
+        data = GetComponent<SolutionData>();
+
         StartCoroutine(LifeTime());
         meshRenderer = GetComponentInChildren<MeshRenderer>();
         meshRenderer.material.color = targetTask.GetComponent<Task>().GetColor();
@@ -35,7 +38,7 @@ public class Solution : MonoBehaviour {
 
         if(targetTask.GetComponent<Task>())
         {
-            targetTask.GetComponent<Task>().SolveProblem();
+            targetTask.GetComponent<Task>().SolveProblem(data.SolutionQuality);
         }
 
         Destroy(gameObject);
