@@ -42,7 +42,7 @@ public class AgentGUI : MonoBehaviour {
 
             if (dropdownList[i].GetComponent<Project>())
             {
-                option.text = dropdownList[i].GetComponent<Project>().GetProjectName();
+                option.text = dropdownList[i].GetComponent<Task>().GetName();
                 dropdownMenu.options.Add(option);
             }
             else

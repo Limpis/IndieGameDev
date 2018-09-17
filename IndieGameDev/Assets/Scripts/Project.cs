@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Project : MonoBehaviour {
+public class Project : Task {
 
     [Header("General Information")]
     [SerializeField]
@@ -15,15 +15,15 @@ public class Project : MonoBehaviour {
 
     private ProjectGUI gui;
     private int projectNumber = 0;
-    private bool activeProject;
-    private int remainingProblems;
-    private string projectName;
-
+    //private bool activeProject;
+    //private int remainingProblems;
+    //private string projectName;
+    
     public bool StartNewProject()
     {
-        if(!activeProject)
+        if(!base.isActive)
         {
-            activeProject = true;
+            base.isActive = true;
             projectNumber++;
             Debug.Log("New project started");
             return true;
@@ -36,24 +36,24 @@ public class Project : MonoBehaviour {
 
     public bool InitializeProject(int sizeIndex)
     {
-        if (activeProject)
+        if (base.isActive)
         {
             switch (sizeIndex)
             {
                 case 0:
                     CalculateInitialProblems(smallProjectProblems);
-                    projectName = "sProjectNr" + projectNumber;
-                    gui.SetProjectNameText(projectName);
+                    base.taskName = "sProjectNr" + projectNumber;
+                    gui.SetProjectNameText(base.taskName);
                     break;
                 case 1:
                     CalculateInitialProblems(mediumProjectProblems);
-                    projectName = "mProjectNr" + projectNumber;
-                    gui.SetProjectNameText(projectName);
+                    base.taskName = "mProjectNr" + projectNumber;
+                    gui.SetProjectNameText(base.taskName);
                     break;
                 case 2:
                     CalculateInitialProblems(largeProjectProblems);
-                    projectName = "lProjectNr" + projectNumber;
-                    gui.SetProjectNameText(projectName);
+                    base.taskName = "lProjectNr" + projectNumber;
+                    gui.SetProjectNameText(base.taskName);
                     break;
                 default:
                     Debug.Log("Error! Incorrect index set in project size button");
@@ -83,7 +83,7 @@ public class Project : MonoBehaviour {
         return list;
     }
 
-    public void SolveProblem()
+    public override void SolveProblem()
     {
         if(remainingProblems > 0)
         {
@@ -96,12 +96,12 @@ public class Project : MonoBehaviour {
         }
     }
 
-    public string GetProjectName()
+    /*public string GetProjectName()
     {
         return projectName;
-    }
+    }*/
 
-    public bool ProjectIsActive()
+    /*public bool ProjectIsActive()
     {
         if(activeProject)
         {
@@ -111,12 +111,12 @@ public class Project : MonoBehaviour {
         {
             return false;
         }
-    }
+    }*/
 
     private void Start()
     {
         gui = GetComponent<ProjectGUI>();
-        activeProject = false;
+        base.isActive = false;
     }
 
     private void CalculateInitialProblems(int baseSize)

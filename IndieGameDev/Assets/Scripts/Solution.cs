@@ -32,9 +32,9 @@ public class Solution : MonoBehaviour {
     {
         yield return new WaitForSeconds(lifeTime);
 
-        if(targetTask.GetComponent<Project>())
+        if(targetTask.GetComponent<Task>())
         {
-            targetTask.GetComponent<Project>().SolveProblem();
+            targetTask.GetComponent<Task>().SolveProblem();
         }
 
         Destroy(gameObject);

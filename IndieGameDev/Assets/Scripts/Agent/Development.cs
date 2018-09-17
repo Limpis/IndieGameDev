@@ -23,7 +23,7 @@ public class Development : MonoBehaviour {
         //Remove inactive tasks
         for (int i = 0; i < availableTasks.Count; i++)
         {
-            if (!availableTasks[i].GetComponent<Project>().ProjectIsActive())
+            if (!availableTasks[i].GetComponent<Task>().IsActive())
             {
                 availableTasks.Remove(availableTasks[i]);
             }
@@ -39,7 +39,7 @@ public class Development : MonoBehaviour {
         {
             workedTask = gui.GetActiveTask();
             StartCoroutine(ProblemSolving(workedTask));
-            Debug.Log("Worked task is now: " + workedTask.GetComponent<Project>().GetProjectName());
+            Debug.Log("Worked task is now: " + workedTask.GetComponent<Task>().GetName());
         }
         else if (gui.GetActiveTask() == null && workedTask != null)
         {
