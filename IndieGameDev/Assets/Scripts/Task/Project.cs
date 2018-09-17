@@ -12,6 +12,8 @@ public class Project : Task {
     [SerializeField]
     [Tooltip("A percentage number with which project size can scale from base value.")]
     private int projectSizeFluctuation;
+    [SerializeField]
+    new Color taskColor;
 
     private ProjectGUI gui;
     private int projectNumber = 0;
@@ -117,6 +119,7 @@ public class Project : Task {
     {
         gui = GetComponent<ProjectGUI>();
         base.isActive = false;
+        base.SetColor(taskColor);
     }
 
     private void CalculateInitialProblems(int baseSize)

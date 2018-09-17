@@ -9,6 +9,7 @@ public class Task : MonoBehaviour {
     protected bool isActive = false;
     protected string taskName;
     protected int remainingProblems;
+    protected Color taskColor = Color.cyan;
 
     public bool IsActive()
     {
@@ -27,6 +28,11 @@ public class Task : MonoBehaviour {
         return taskName;
     }
 
+    public Color GetColor()
+    {
+        return taskColor;
+    }
+
     public virtual void SolveProblem()
     {
         if (remainingProblems > 0)
@@ -39,4 +45,8 @@ public class Task : MonoBehaviour {
         }
     }
 
+    protected void SetColor(Color c)
+    {
+        taskColor = c;
+    }
 }

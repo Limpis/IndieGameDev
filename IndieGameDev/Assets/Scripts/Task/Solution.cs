@@ -10,8 +10,7 @@ public class Solution : MonoBehaviour {
     private float lifeTime;
 
     private GameObject targetTask;
-    private Vector3 defaultSize;
-    private bool animationGrowing = true;
+    private MeshRenderer meshRenderer;
 
     public void SetTarget(GameObject target)
     {
@@ -21,6 +20,8 @@ public class Solution : MonoBehaviour {
     private void Start()
     {
         StartCoroutine(LifeTime());
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
+        meshRenderer.material.color = targetTask.GetComponent<Task>().GetColor();
     }
 
     private void Update()
