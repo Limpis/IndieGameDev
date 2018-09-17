@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InteractionController : MonoBehaviour {
 
@@ -13,10 +14,12 @@ public class InteractionController : MonoBehaviour {
 
     private void OnMouseOver()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            //Add raycast so that mouse is not tracing though other GUI components.
-            gui.ToggleCanvas();
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                gui.ToggleCanvas();
+            }
         }
     }
 }

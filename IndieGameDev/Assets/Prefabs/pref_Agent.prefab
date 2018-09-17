@@ -774,6 +774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e8f40e258d46514f930aa4c43e3cac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentCanvas: {fileID: 1304066138647992}
+  taskDropdown: {fileID: 1193201697574560}
 --- !u!114 &114511859125392414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -973,7 +975,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   solutionSpawn: {fileID: 4502383006201820}
-  workedTask: {fileID: 0}
   solutionPrefab: {fileID: 1733094529598800, guid: 7e6b278b593ec824787fc5e79634b69c,
     type: 2}
 --- !u!114 &114721912413604390

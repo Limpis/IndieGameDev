@@ -13,21 +13,17 @@ public class Development : MonoBehaviour {
     private AgentGUI gui;
     private List<GameObject> availableTasks;
 
-    private void Start()
+    public void AgentTick()
     {
-        gui = GetComponent<AgentGUI>();
-    }
+        //Method used for updating task status and improving game performance.
 
-    private void Update()
-    { 
-        //Remove from update into its own development tick.
         availableTasks = new List<GameObject>();
         availableTasks.AddRange(GameObject.FindGameObjectsWithTag("Task"));
 
         //Remove inactive tasks
         for (int i = 0; i < availableTasks.Count; i++)
         {
-            if(!availableTasks[i].GetComponent<Project>().ProjectIsActive())
+            if (!availableTasks[i].GetComponent<Project>().ProjectIsActive())
             {
                 availableTasks.Remove(availableTasks[i]);
             }
@@ -39,17 +35,22 @@ public class Development : MonoBehaviour {
         }
 
         //Assign worked task according to dropdown menu in GUI.
-        if(gui.GetActiveTask() != null && gui.GetActiveTask() != workedTask)
+        if (gui.GetActiveTask() != null && gui.GetActiveTask() != workedTask)
         {
             workedTask = gui.GetActiveTask();
             StartCoroutine(ProblemSolving(workedTask));
             Debug.Log("Worked task is now: " + workedTask.GetComponent<Project>().GetProjectName());
         }
-        else if(gui.GetActiveTask() == null && workedTask != null)
+        else if (gui.GetActiveTask() == null && workedTask != null)
         {
             workedTask = null;
             Debug.Log("Worked task is now: None");
         }
+    }
+
+    private void Start()
+    {
+        gui = GetComponent<AgentGUI>();
     }
 
     private IEnumerator ProblemSolving(GameObject startTask)

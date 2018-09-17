@@ -16,14 +16,43 @@ public class Appearance : MonoBehaviour {
 
     private MeshRenderer bodyMeshRenderer, headMeshRenderer;
 
+    public void SetColors(Color body, Color head)
+    {
+        if(bodyMeshRenderer == null)
+        {
+            bodyMeshRenderer = agentBody.GetComponent<MeshRenderer>();
+            initialBodyMat = bodyMeshRenderer.material;
+        }
+        if(headMeshRenderer == null)
+        {
+            headMeshRenderer = agentHead.GetComponent<MeshRenderer>();
+            initialHeadMat = headMeshRenderer.material;
+        }
+
+        shirtColor = body;
+        skinColor = head;
+
+        UpdateColors();
+    }
+
     private void Start()
     {
-        bodyMeshRenderer = agentBody.GetComponent<MeshRenderer>();
-        headMeshRenderer = agentHead.GetComponent<MeshRenderer>();
+        if (bodyMeshRenderer == null)
+        {
+            bodyMeshRenderer = agentBody.GetComponent<MeshRenderer>();
+            initialBodyMat = bodyMeshRenderer.material;
+        }
+        if (headMeshRenderer == null)
+        {
+            headMeshRenderer = agentHead.GetComponent<MeshRenderer>();
+            initialHeadMat = headMeshRenderer.material;
+        }
 
-        initialBodyMat = bodyMeshRenderer.material;
-        initialHeadMat = headMeshRenderer.material;
+        UpdateColors();
+    }
 
+    private void UpdateColors()
+    {
         customBodyMat = new Material(initialBodyMat);
         customHeadMat = new Material(initialHeadMat);
 
