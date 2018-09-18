@@ -1045,6 +1045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   solutionSpawn: {fileID: 4502383006201820}
+  productionSpeed: 1
   solutionPrefab: {fileID: 1733094529598800, guid: 7e6b278b593ec824787fc5e79634b69c,
     type: 2}
 --- !u!114 &114721912413604390

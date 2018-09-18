@@ -7,6 +7,8 @@ public class Development : MonoBehaviour {
     [SerializeField]
     private Transform solutionSpawn;
     [SerializeField]
+    private float productionSpeed;
+    [SerializeField]
     GameObject solutionPrefab;
 
     private GameObject workedTask;
@@ -67,7 +69,7 @@ public class Development : MonoBehaviour {
             solution.GetComponent<Solution>().SetTarget(workedTask);
             solution.GetComponent<SolutionData>().SolutionQuality = personality.GetSkill();
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(productionSpeed);
         }
     }
 }

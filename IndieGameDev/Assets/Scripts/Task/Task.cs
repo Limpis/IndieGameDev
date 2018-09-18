@@ -8,6 +8,7 @@ public class Task : MonoBehaviour {
 
     protected bool isActive = false;
     protected string taskName;
+    protected int initialProblems;
     protected int remainingProblems;
     protected int solutionsCount;
     protected int totalQuality;
@@ -55,7 +56,7 @@ public class Task : MonoBehaviour {
 
     public virtual void ShipTask()
     {
-        Debug.Log(GetName() + " has been shipped!");
+        Debug.Log("Error! No ShipTask() defined");
     }
 
     protected void SetColor(Color c)
@@ -75,4 +76,14 @@ public class Task : MonoBehaviour {
     {
         isActive = false;
     }
+
+    protected void FlushValues()
+    {
+        taskName = null;
+        initialProblems = 0;
+        remainingProblems = 0;
+        solutionsCount = 0;
+        totalQuality = 0;
+        averageQuality = 0;
+}
 }

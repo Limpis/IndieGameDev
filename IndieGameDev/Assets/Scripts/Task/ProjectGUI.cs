@@ -114,6 +114,8 @@ public class ProjectGUI : MonoBehaviour {
         {
             ProjectSizeAverageProblemsText[i].GetComponent<Text>().text = "~" + list[i].ToString() + " problems";
         }
+
+        UpdateAverageQualityText(0);
     }
 
     private float CalculateSliderPosition()

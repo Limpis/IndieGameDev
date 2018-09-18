@@ -13,6 +13,12 @@ public class Capital : MonoBehaviour {
     [SerializeField]
     private Text capitalText;
 
+    public void AddMoney(int money)
+    {
+        currentMoney += money;
+        UpdateCapitalText();
+    }
+
     private void Start()
     {
         UpdateCapitalText();

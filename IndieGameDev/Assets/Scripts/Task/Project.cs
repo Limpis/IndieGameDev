@@ -13,6 +13,8 @@ public class Project : Task {
     [Tooltip("A percentage number with which project size can scale from base value.")]
     private int projectSizeFluctuation;
     [SerializeField]
+    private GameObject productPrefab;
+    [SerializeField]
     Color solutionColor;
 
     private ProjectGUI gui;
@@ -27,6 +29,7 @@ public class Project : Task {
         {
             base.isActive = true;
             projectNumber++;
+            FlushValues();
             Debug.Log("New project started");
             return true;
         }
@@ -99,8 +102,10 @@ public class Project : Task {
 
     public override void ShipTask()
     {
-        //Create a product which has a value and sell it;
         Debug.Log(GetName() + " project has been put to the market");
+
+        GameObject product = Instantiate(productPrefab);
+        product.GetComponent<Product>().Initialize(mediumProjectProblems, largeProjectProblems, initialProblems, averageQuality);
     }
 
     private void Start()
@@ -122,6 +127,7 @@ public class Project : Task {
         float temp = baseSize + (baseSize * positiveFactor) - (baseSize * negativeFactor);
 
         remainingProblems = Mathf.RoundToInt(temp);
+        base.initialProblems = remainingProblems;
     }
 
     private IEnumerator progressTick()
