@@ -89,12 +89,18 @@ public class Project : Task {
     {
         base.SolveProblem(quality);
 
-        if(remainingProblems > 0)
+        if(remainingProblems >= 0)
         {
             gui.UpdateProblemsProgress(remainingProblems, false);
         }
 
         gui.UpdateAverageQualityText(base.averageQuality);
+    }
+
+    public override void ShipTask()
+    {
+        //Create a product which has a value and sell it;
+        Debug.Log(GetName() + " project has been put to the market");
     }
 
     private void Start()
@@ -118,7 +124,7 @@ public class Project : Task {
         remainingProblems = Mathf.RoundToInt(temp);
     }
 
-    IEnumerator progressTick()
+    private IEnumerator progressTick()
     {
         while (remainingProblems > 0)
         {
@@ -127,5 +133,12 @@ public class Project : Task {
             remainingProblems--;
             gui.UpdateProblemsProgress(remainingProblems, false);
         }
+    }
+
+    protected override void TaskEnd()
+    {
+        base.TaskEnd();
+
+        gui.ProjectFinished();
     }
 }

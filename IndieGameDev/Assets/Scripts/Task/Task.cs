@@ -39,15 +39,23 @@ public class Task : MonoBehaviour {
 
     public virtual void SolveProblem(int quality)
     {
-        if (remainingProblems > 0)
+        if (remainingProblems > 1)
         {
             remainingProblems--;
             CalculateQuality(quality);
         }
         else
         {
-            Debug.Log("Project finished! Follow up not implemented yet");
+            remainingProblems = 0;
+            CalculateQuality(quality);
+
+            TaskEnd();
         }
+    }
+
+    public virtual void ShipTask()
+    {
+        Debug.Log(GetName() + " has been shipped!");
     }
 
     protected void SetColor(Color c)
@@ -61,5 +69,10 @@ public class Task : MonoBehaviour {
         totalQuality += quality;
 
         averageQuality = totalQuality / solutionsCount;
+    }
+
+    protected virtual void TaskEnd()
+    {
+        isActive = false;
     }
 }

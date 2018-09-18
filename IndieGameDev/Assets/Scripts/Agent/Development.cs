@@ -34,6 +34,10 @@ public class Development : MonoBehaviour {
         {
             gui.PopulateDropDown(availableTasks);
         }
+        else if(availableTasks.Count <= 0)
+        {
+            gui.ClearDropdown();
+        }
 
         //Assign worked task according to dropdown menu in GUI.
         if (gui.GetActiveTask() != null && gui.GetActiveTask() != workedTask)
@@ -61,7 +65,6 @@ public class Development : MonoBehaviour {
         {
             GameObject solution = Instantiate(solutionPrefab, solutionSpawn);
             solution.GetComponent<Solution>().SetTarget(workedTask);
-            Debug.Log("Skill is: " + personality.GetSkill());
             solution.GetComponent<SolutionData>().SolutionQuality = personality.GetSkill();
 
             yield return new WaitForSeconds(3f);

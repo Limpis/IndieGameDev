@@ -22,9 +22,10 @@ public class AgentTick : MonoBehaviour {
 
     private void AgentUpdateTick()
     {
+        //Initialize agents list.
         if(agents == null)
         {
-            agents = GetComponent<AgentSpawn>().GetAgents();
+            agents = new List<GameObject>(GetComponent<AgentSpawn>().GetAgents());
         }
 
         for (int i = 0; i < agents.Count; i++)

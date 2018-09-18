@@ -9,6 +9,8 @@ public class AgentGUI : MonoBehaviour {
     private GameObject agentCanvas;
     [SerializeField]
     private GameObject taskDropdown;
+    [SerializeField]
+    private GameObject skillText;
 
     private List<GameObject> dropdownList;
     private GameObject objectActiveInDropdown;
@@ -58,9 +60,27 @@ public class AgentGUI : MonoBehaviour {
         dropdownMenu.RefreshShownValue();
     }
 
+    public void ClearDropdown()
+    {
+        dropdownMenu.ClearOptions();
+
+        Dropdown.OptionData option = new Dropdown.OptionData();
+        option.text = "None";
+        dropdownMenu.options.Add(option);
+
+        dropdownMenu.RefreshShownValue();
+
+        ResetDropdownValue();
+    }
+
     public GameObject GetActiveTask()
     {
         return objectActiveInDropdown;
+    }
+
+    public void SetSkillText(int skill)
+    {
+        skillText.GetComponent<Text>().text = skill.ToString();
     }
 
     private void Start()
@@ -84,5 +104,10 @@ public class AgentGUI : MonoBehaviour {
         {
             objectActiveInDropdown = dropdownList[change.value - 1];
         }
+    }
+
+    private void ResetDropdownValue()
+    {
+        dropdownMenu.value = 0;
     }
 }
