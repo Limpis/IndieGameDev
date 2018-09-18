@@ -16,6 +16,18 @@ public class AgentGUI : MonoBehaviour {
     private GameObject objectActiveInDropdown;
     private Dropdown dropdownMenu;
 
+    public bool CanvasActive()
+    {
+        if(agentCanvas.activeSelf == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void ToggleCanvas()
     {
         if (agentCanvas.activeSelf == false)

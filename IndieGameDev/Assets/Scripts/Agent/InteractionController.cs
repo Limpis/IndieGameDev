@@ -6,10 +6,12 @@ using UnityEngine.EventSystems;
 public class InteractionController : MonoBehaviour {
 
     AgentGUI gui;
+    AgentGUIHelper helper;
 
     private void Start()
     {
         gui = GetComponent<AgentGUI>();
+        helper = GetComponentInParent<AgentGUIHelper>();
     }
 
     private void OnMouseOver()
@@ -19,6 +21,7 @@ public class InteractionController : MonoBehaviour {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 gui.ToggleCanvas();
+                helper.SetActiveGUI(gameObject);
             }
         }
     }
