@@ -10,7 +10,7 @@ public class AgentGUI : MonoBehaviour {
     [SerializeField]
     private GameObject taskDropdown;
     [SerializeField]
-    private GameObject skillText;
+    private GameObject skillText, motivationText;
 
     private List<GameObject> dropdownList;
     private GameObject objectActiveInDropdown;
@@ -93,6 +93,11 @@ public class AgentGUI : MonoBehaviour {
     public void SetSkillText(int skill)
     {
         skillText.GetComponent<Text>().text = skill.ToString();
+    }
+
+    public void SetMotivationText(int motivation)
+    {
+        motivationText.GetComponent<Text>().text = motivation.ToString();
     }
 
     private void Start()

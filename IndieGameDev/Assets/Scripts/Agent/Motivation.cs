@@ -2,37 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Personality : MonoBehaviour {
+public class Motivation : MonoBehaviour {
+
+    //Every agent has an individual motivation value.
+    //Motivation affects work speed and quality of solutions.
 
     [SerializeField]
-    private int minDevSkill, maxDevSkill;
+    private int minStartMotivation, maxStartMotivation;
     [SerializeField]
     [Range(0f, 1.0f)]
     private float qualityVariationPercentage;
 
-    private int developmentSkill;
+    private int agentMotivation;
 
-    public int DevelopmentSkill { get; set; }
+    public int AgentMotivation { get; set; }
 
-    public int SkillQualityEffect(int quality)
+    public int MotivationQualityEffect(int quality)
     {
-        int solutionQuality = (quality + developmentSkill) / 2;
+        //Recieve base quality and calculate motivation's effect on solution quality.
+        int solutionQuality = (quality + (agentMotivation / 2)) / 2;
         solutionQuality = QualityVariation(solutionQuality);
 
-        Debug.Log("Quality after skill check: " + solutionQuality);
-
+        Debug.Log("Quality after motivation check: " + solutionQuality);
         return solutionQuality;
     }
 
     private void Start()
     {
-        RandomizeSkill();
+        RandomizeMotivation();
     }
 
-    private void RandomizeSkill()
+    private void RandomizeMotivation()
     {
-        developmentSkill = Random.Range(minDevSkill, maxDevSkill);
-        GetComponent<AgentGUI>().SetSkillText(developmentSkill); //Look for implementations separating update of GUI.
+        agentMotivation = Random.Range(minStartMotivation, maxStartMotivation);
+        GetComponent<AgentGUI>().SetMotivationText(agentMotivation);
     }
 
     private int QualityVariation(int quality)

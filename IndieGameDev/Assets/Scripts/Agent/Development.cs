@@ -9,12 +9,16 @@ public class Development : MonoBehaviour {
     [SerializeField]
     private float productionSpeed;
     [SerializeField]
+    private int solutionBaseQuality;
+    [SerializeField]
     GameObject solutionPrefab;
 
     private GameObject workedTask;
+    private List<GameObject> availableTasks;
+
     private AgentGUI gui;
     private Personality personality;
-    private List<GameObject> availableTasks;
+    private Motivation motivation;
 
     public void AgentTick()
     {
@@ -59,6 +63,7 @@ public class Development : MonoBehaviour {
     {
         gui = GetComponent<AgentGUI>();
         personality = GetComponent<Personality>();
+        motivation = GetComponent<Motivation>();
     }
 
     private IEnumerator ProblemSolving(GameObject startTask)
@@ -67,9 +72,19 @@ public class Development : MonoBehaviour {
         {
             GameObject solution = Instantiate(solutionPrefab, solutionSpawn);
             solution.GetComponent<Solution>().SetTarget(workedTask);
-            solution.GetComponent<SolutionData>().SolutionQuality = personality.GetSkill();
+            solution.GetComponent<SolutionData>().SolutionQuality = CalculateQuality();
 
             yield return new WaitForSeconds(productionSpeed);
         }
+    }
+
+    private int CalculateQuality()
+    {
+        int solutionQuality = solutionBaseQuality;
+
+        solutionQuality = personality.SkillQualityEffect(solutionQuality);
+        solutionQuality = motivation.MotivationQualityEffect(solutionQuality);
+
+        return solutionQuality;
     }
 }
