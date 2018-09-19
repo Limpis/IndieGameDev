@@ -7,7 +7,7 @@ public class Development : MonoBehaviour {
     [SerializeField]
     private Transform solutionSpawn;
     [SerializeField]
-    private float productionSpeed;
+    private float baseProductionSpeed;
     [SerializeField]
     private int solutionBaseQuality;
     [SerializeField]
@@ -68,13 +68,16 @@ public class Development : MonoBehaviour {
 
     private IEnumerator ProblemSolving(GameObject startTask)
     {
+        yield return new WaitForSeconds(baseProductionSpeed);
+
         while (workedTask == startTask)
         {
             GameObject solution = Instantiate(solutionPrefab, solutionSpawn);
             solution.GetComponent<Solution>().SetTarget(workedTask);
             solution.GetComponent<SolutionData>().SolutionQuality = CalculateQuality();
 
-            yield return new WaitForSeconds(productionSpeed);
+            WaitForSeconds prodSpeed = new WaitForSeconds(motivation.MotivationSpeedEffect(baseProductionSpeed));
+            yield return prodSpeed;
         }
     }
 

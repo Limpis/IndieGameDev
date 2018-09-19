@@ -834,8 +834,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29af534af6a565c45aedce198d11809e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minStartMotivation: 50
-  maxStartMotivation: 100
+  minMotivation: 0
+  maxMotivation: 100
   qualityVariationPercentage: 0.2
 --- !u!114 &114416922797000218
 MonoBehaviour:
@@ -1162,7 +1162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   solutionSpawn: {fileID: 4502383006201820}
-  productionSpeed: 3
+  baseProductionSpeed: 5
   solutionBaseQuality: 100
   solutionPrefab: {fileID: 1733094529598800, guid: 7e6b278b593ec824787fc5e79634b69c,
     type: 2}

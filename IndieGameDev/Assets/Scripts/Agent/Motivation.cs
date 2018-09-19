@@ -8,7 +8,7 @@ public class Motivation : MonoBehaviour {
     //Motivation affects work speed and quality of solutions.
 
     [SerializeField]
-    private int minStartMotivation, maxStartMotivation;
+    private int minMotivation, maxMotivation;
     [SerializeField]
     [Range(0f, 1.0f)]
     private float qualityVariationPercentage;
@@ -27,6 +27,28 @@ public class Motivation : MonoBehaviour {
         return solutionQuality;
     }
 
+    public float MotivationSpeedEffect(float productionSpeed)
+    {
+        //Motivation is above mid, increase production speed.
+        if((agentMotivation - Mathf.Lerp(minMotivation, maxMotivation, 0.5f)) > 0)
+        {
+            float speedChange = (agentMotivation - Mathf.Lerp(minMotivation, maxMotivation, 0.5f));
+            speedChange = speedChange / 2;
+            productionSpeed = productionSpeed - (speedChange * 0.1f);
+        }
+
+        //Motivation is below mid, decrease production speed.
+        else if((agentMotivation - Mathf.Lerp(minMotivation, maxMotivation, 0.5f)) <= 0)
+        {
+            float speedChange = (agentMotivation - Mathf.Lerp(minMotivation, maxMotivation, 0.5f));
+            speedChange = speedChange / 2;
+            productionSpeed = productionSpeed - (speedChange * 0.1f);
+        }
+
+        Debug.Log("Waiting for: " + productionSpeed + " seconds.");
+        return productionSpeed;
+    }
+
     private void Start()
     {
         RandomizeMotivation();
@@ -34,7 +56,7 @@ public class Motivation : MonoBehaviour {
 
     private void RandomizeMotivation()
     {
-        agentMotivation = Random.Range(minStartMotivation, maxStartMotivation);
+        agentMotivation = Random.Range(minMotivation, maxMotivation);
         GetComponent<AgentGUI>().SetMotivationText(agentMotivation);
     }
 
