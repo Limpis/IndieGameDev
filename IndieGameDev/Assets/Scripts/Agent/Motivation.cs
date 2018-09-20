@@ -8,7 +8,7 @@ public class Motivation : MonoBehaviour {
     //Motivation affects work speed and quality of solutions.
 
     [SerializeField]
-    private int minMotivation, maxMotivation;
+    private int minMotivation = 0, maxMotivation = 0;
     [SerializeField]
     [Range(0f, 1.0f)]
     private float qualityVariationPercentage;

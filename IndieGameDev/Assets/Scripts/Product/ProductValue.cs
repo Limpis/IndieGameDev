@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProductValue : MonoBehaviour {
 
     [SerializeField]
-    private int smallBaseValue, mediumBaseValue, largeBaseValue;
+    private int smallBaseValue = 0, mediumBaseValue = 0, largeBaseValue = 0;
 
     private int productValue;
 

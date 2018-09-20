@@ -8,7 +8,7 @@ public class Project : Task {
     [SerializeField]
     private int smallProjectProblems;
     [SerializeField]
-    private int mediumProjectProblems, largeProjectProblems;
+    private int mediumProjectProblems = 0, largeProjectProblems = 0;
     [SerializeField]
     [Tooltip("A percentage number with which project size can scale from base value.")]
     private int projectSizeFluctuation;

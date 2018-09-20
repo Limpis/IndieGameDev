@@ -8,11 +8,11 @@ public class Product : MonoBehaviour {
     //and the are able to generate value for the company.
     [Header("NOTE! Values not to be set in inspector.")]
     [SerializeField]
-    private int mediumProductThreshold;
+    private int mediumProductThreshold = 0;
     [SerializeField]
-    private int largeprojectThreshold;
+    private int largeprojectThreshold = 0;
     [SerializeField]
-    private int productSize, productQuality;
+    private int productSize = 0, productQuality = 0;
 
     private ProductValue productValue;
 
@@ -23,7 +23,7 @@ public class Product : MonoBehaviour {
         productQuality = quality;
 
         productValue = GetComponent<ProductValue>();
-        productValue.CalculateValue(mThreshold, lThreshold, size, quality);
+        productValue.CalculateValue(mediumProductThreshold, largeprojectThreshold, productSize, productQuality);
         StartCoroutine(SellTimer());
     }
 

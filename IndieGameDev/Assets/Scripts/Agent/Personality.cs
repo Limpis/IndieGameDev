@@ -5,7 +5,7 @@ using UnityEngine;
 public class Personality : MonoBehaviour {
 
     [SerializeField]
-    private int minDevSkill, maxDevSkill;
+    private int minDevSkill = 0, maxDevSkill = 0;
     [SerializeField]
     [Range(0f, 1.0f)]
     private float qualityVariationPercentage;

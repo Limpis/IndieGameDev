@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Calendar : MonoBehaviour {
 
     [SerializeField]
-    private int startYear, startWeek;
+    private int startYear = 2018, startWeek = 1;
     [SerializeField]
     private Text calendarText;
 
