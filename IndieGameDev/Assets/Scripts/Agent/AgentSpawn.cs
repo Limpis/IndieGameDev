@@ -20,6 +20,7 @@ public class AgentSpawn : MonoBehaviour {
     private Color[] possibleSkinColors;
 
     private List<GameObject> agents = new List<GameObject>();
+    private CompanySalaries salaries;
 
     public List<GameObject> GetAgents()
     {
@@ -28,6 +29,8 @@ public class AgentSpawn : MonoBehaviour {
 
     private void Start()
     {
+        salaries = GameObject.FindGameObjectWithTag("Capital").GetComponent<CompanySalaries>();
+
         SpawnAgents();
     }
 
@@ -48,6 +51,8 @@ public class AgentSpawn : MonoBehaviour {
             SetAgentColor(newAgent);
             agents.Add(newAgent);
         }
+
+        UpdateCompanySalaries();
     }
 
     private void SetAgentColor(GameObject agent)
@@ -66,5 +71,10 @@ public class AgentSpawn : MonoBehaviour {
         Color c = possibleColors[randomNumber];
 
         return c;
+    }
+
+    private void UpdateCompanySalaries()
+    {
+        salaries.SetAgents(agents);
     }
 }

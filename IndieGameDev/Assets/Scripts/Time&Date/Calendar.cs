@@ -11,9 +11,14 @@ public class Calendar : MonoBehaviour {
     private Text calendarText;
 
     private int currentYear, currentWeek;
+    private int weekInMonth = 1;
+
+    private CompanySalaries salaries;
 
     public void WeekTick()
     {
+        MonthTick();
+
         currentWeek += 1;
         if(currentWeek > 52)
         {
@@ -30,10 +35,22 @@ public class Calendar : MonoBehaviour {
         currentWeek = startWeek;
 
         UpdateCalendarText();
+        salaries = GameObject.FindGameObjectWithTag("Capital").GetComponent<CompanySalaries>();
     }
 
     private void UpdateCalendarText()
     {
         calendarText.text = currentYear.ToString() + " W" + currentWeek.ToString();
+    }
+
+    private void MonthTick()
+    {
+        weekInMonth++;
+
+        if (weekInMonth > 4)
+        {
+            salaries.PaySalaries();
+            weekInMonth = 1;
+        }
     }
 }
